@@ -2,7 +2,7 @@ import React from 'react';
 
 const QRCodeDisplay = () => {
 	return (
-		<div className='input bg-red'>
+		<div className='input panel'>
 			<div id='canvas'></div>
 		</div>
 	);

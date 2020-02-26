@@ -15,7 +15,6 @@ class App extends React.Component {
       network: '',
       password: '',
       encryption: 'WPA',
-
     };
   }
 
@@ -28,9 +27,15 @@ class App extends React.Component {
     //   // TODO: want to use canvas.insertBefore( newNode, referenceNode )
   // TODO: figure out how to get the checkbox input
 
-  onNetworkChange = ( event ) => { this.setState( { network: event.target.value }) }
-  onPasswordChange = ( event ) => { this.setState( { password: event.target.value }) }
-  onEncryptionChange = ( event ) => { this.setState( { encryption: event.target.value }) }
+  onHandleInputChange = ( event ) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [ name ]: value
+    });
+  }
 
   onSubmit = () => {
     this.generateQRCode();
@@ -54,7 +59,7 @@ class App extends React.Component {
 
     // generate QR code
     let credentials = `WIFI:S:${network};T:${encryption};P:${password};`
-    QRCode.toCanvas( credentials, { width: 500 }, function ( err, qr ) {
+    QRCode.toCanvas( credentials, { scale: 10 }, function ( err, qr ) {
       if ( err ) {
         console.error( err );
       }
@@ -62,6 +67,8 @@ class App extends React.Component {
       canvas.appendChild( qr );
     });
   }
+
+  // TODO: on window size change, re generate QRCode
 
   render() {
     return (
@@ -72,9 +79,7 @@ class App extends React.Component {
 
         <div className='container'>
           <WifiForm
-            onNetworkChange={ this.onNetworkChange }
-            onPasswordChange={ this.onPasswordChange }
-            onEncryptionChange={ this.onEncryptionChange }
+            onHandleInputChange={ this.onHandleInputChange }
             onSubmit={ this.onSubmit }
           />
           <QRCodeDisplay/>
