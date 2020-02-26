@@ -15,16 +15,11 @@ class App extends React.Component {
       network: '',
       password: '',
       encryption: 'WPA',
+      hidden: false
     };
   }
 
-    // // if the network's SSID is hidden
-    // // TODO: put a check mark for hidden
-    // // if ( hidden ) {
-    // //   text += 'H:true';
-    // // }
-
-    //   // TODO: want to use canvas.insertBefore( newNode, referenceNode )
+      //   // TODO: want to use canvas.insertBefore( newNode, referenceNode )
   // TODO: figure out how to get the checkbox input
 
   onHandleInputChange = ( event ) => {
@@ -58,7 +53,9 @@ class App extends React.Component {
     }
 
     // generate QR code
-    let credentials = `WIFI:S:${network};T:${encryption};P:${password};`
+    let credentials = `WIFI:S:${network};T:${encryption};P:${password};`;
+    credentials += ( this.state.hidden ) ? 'H:true' : 'H:false';
+
     QRCode.toCanvas( credentials, { scale: 10 }, function ( err, qr ) {
       if ( err ) {
         console.error( err );

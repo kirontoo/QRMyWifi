@@ -45,7 +45,7 @@ const WifiForm = ( { onHandleInputChange, onSubmit } ) => {
                 </div>
                 <div className="mt3">
                   <label className="pa0 ma0 lh-copy f6 pointer">
-                  <input className="checkbox" type="checkbox"/>
+                  <input className="checkbox" type="checkbox" name="hidden"/>
                   Hidden
                   </label>
                 </div>
