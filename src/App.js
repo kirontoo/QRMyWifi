@@ -15,9 +15,23 @@ class App extends React.Component {
       network: '',
       password: '',
       encryption: 'WPA',
-      hidden: false
+      hidden: false,
+      window: {
+        width: 0,
+        height: 0
+      }
     };
   }
+
+  componentDidMount() {
+    window.addEventListener( 'resize', this.updateDimensions );
+  }
+
+  componentWillUnmount() {
+    window.addEventListener( 'resize', this.updateDimensions );
+  }
+
+  updateDimensions = () => { this.setState( { window: { width: window.innerWidth, height: window.innerHeight } })}
 
       //   // TODO: want to use canvas.insertBefore( newNode, referenceNode )
   // TODO: figure out how to get the checkbox input
