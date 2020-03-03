@@ -4,7 +4,7 @@ import './WifiForm.css';
 // TODO: add input for WPA option
 const WifiForm = ( { onHandleInputChange, onSubmit } ) => {
 	return (
-          <div className='input panel'>
+          <div className='panel'>
             <h3>Welcome to QR My WIFI!</h3>
 
             <div id="qr-info">
@@ -21,7 +21,8 @@ const WifiForm = ( { onHandleInputChange, onSubmit } ) => {
 										className="pa2 input-reset ba bg-transparent hover-bg-black-70 hover-white w-100"
 										onChange={ onHandleInputChange }
 										type="text"
-										name="network"
+                    name="network"
+                    placeholder="sampleSSID"
 										id="network"/>
                 </div>
                 <div className="mv3">
@@ -31,6 +32,7 @@ const WifiForm = ( { onHandleInputChange, onSubmit } ) => {
 										onChange={ onHandleInputChange }
 										type="password"
                     name="password"
+                    placeholder="samplePassword"
 										id="password"/>
                 </div>
                 <div className="mt3">

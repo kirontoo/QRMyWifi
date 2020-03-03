@@ -1,8 +1,9 @@
 import React from 'react';
 
-const QRCodeDisplay = () => {
+const QRCodeDisplay = ( { title } ) => {
 	return (
-		<div className='input panel'>
+		<div className='panel'>
+			<h1>{ title }</h1>
 			<div id='canvas'></div>
 		</div>
 	);

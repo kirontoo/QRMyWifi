@@ -12,26 +12,17 @@ class App extends React.Component {
     super();
 
     this.state = {
-      network: '',
-      password: '',
+      network: 'sampleSSID',
+      password: 'samplePassword',
       encryption: 'WPA',
       hidden: false,
-      window: {
-        width: 0,
-        height: 0
-      }
+      title: 'This is a sample QR Code.'
     };
   }
 
   componentDidMount() {
-    window.addEventListener( 'resize', this.updateDimensions );
+    this.generateQRCode();
   }
-
-  componentWillUnmount() {
-    window.addEventListener( 'resize', this.updateDimensions );
-  }
-
-  updateDimensions = () => { this.setState( { window: { width: window.innerWidth, height: window.innerHeight } })}
 
       //   // TODO: want to use canvas.insertBefore( newNode, referenceNode )
   // TODO: figure out how to get the checkbox input
@@ -50,8 +41,8 @@ class App extends React.Component {
     this.generateQRCode();
   }
 
-  generateQRCode() {
-    let { network, password, encryption } = this.state;
+  generateQRCode = () => {
+    let { network, password, encryption, hidden } = this.state;
 
     // if entries are not filled, don't generate
     if ( !network && !password) {
@@ -68,15 +59,21 @@ class App extends React.Component {
 
     // generate QR code
     let credentials = `WIFI:S:${network};T:${encryption};P:${password};`;
-    credentials += ( this.state.hidden ) ? 'H:true' : 'H:false';
+    credentials += ( hidden ) ? 'H:true' : 'H:false';
 
     QRCode.toCanvas( credentials, { scale: 10 }, function ( err, qr ) {
       if ( err ) {
         console.error( err );
+        return;
       }
 
       canvas.appendChild( qr );
+
     });
+
+    if ( network === 'sampleSSID' ) {
+      this.setState({ title: 'Here\'s your QR Code!' })
+    };
   }
 
   // TODO: on window size change, re generate QRCode
@@ -85,15 +82,15 @@ class App extends React.Component {
     return (
       <div className="App">
         <nav>
-          <h1 className='dim black underline'>QR My WIFI</h1>
+          <h1 className='black underline'>QR My WIFI</h1>
         </nav>
 
         <div className='container'>
-          <WifiForm
-            onHandleInputChange={ this.onHandleInputChange }
-            onSubmit={ this.onSubmit }
-          />
-          <QRCodeDisplay/>
+            <WifiForm
+              onHandleInputChange={ this.onHandleInputChange }
+              onSubmit={ this.onSubmit }
+            />
+            <QRCodeDisplay title={ this.state.title } />
         </div>
       </div>
     );
