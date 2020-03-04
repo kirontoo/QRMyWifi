@@ -1,4 +1,5 @@
 import React from 'react';
+import domtoimage from 'dom-to-image-more';
 import './App.css';
 import 'tachyons';
 import QRCode from 'qrcode';
@@ -71,12 +72,26 @@ class App extends React.Component {
 
     });
 
-    if ( network === 'sampleSSID' ) {
+    if ( network !== 'sampleSSID' ) {
       this.setState({ title: 'Here\'s your QR Code!' })
     };
   }
 
-  // TODO: on window size change, re generate QRCode
+  exportToPdf() {
+
+  }
+
+  exportToImage() {
+    let qrCode = document.getElementById('canvas');
+
+    domtoimage.toJpeg( qrCode, { quality: 0.95 })
+      .then( function ( dataUrl ) {
+        let link = document.createElement('a');
+        link.download = 'myWifiQRCode.jpeg';
+        link.href = dataUrl;
+        link.click();
+      });
+  }
 
   render() {
     return (
@@ -90,7 +105,10 @@ class App extends React.Component {
               onHandleInputChange={ this.onHandleInputChange }
               onSubmit={ this.onSubmit }
             />
-            <QRCodeDisplay title={ this.state.title } />
+            <QRCodeDisplay title={ this.state.title }
+              exportToPdf={ this.exportToPdf }
+              exportToImage={ this.exportToImage }
+            />
         </div>
       </div>
     );
