@@ -9,8 +9,16 @@ const QRCodeDisplay = ( { title, exportToPdf, exportToImage } ) => {
 			<main>
 				<p className='b'>Export to: </p>
 				<div className='buttonContainer'>
-					<button className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib' onClick={ exportToPdf }>PDF</button>
-					<button className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib' onClick={ exportToImage }>Image</button>
+					<button
+						className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
+						onClick={ exportToPdf }>
+						PDF
+					</button>
+					<button
+						className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
+						onClick={ exportToImage }>
+						Image
+					</button>
 				</div>
 			</main>
 		</div>

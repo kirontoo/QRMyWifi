@@ -17,23 +17,25 @@ const WifiForm = ( { onHandleInputChange, onSubmit } ) => {
               <fieldset className="ba b--transparent ph0 mh0">
                 <div className="mt3">
                   <label className="db fw6 lh-copy f6" htmlFor="network">Network/SSID</label>
-									<input
-										className="pa2 input-reset ba bg-transparent hover-bg-black-70 hover-white w-100"
-										onChange={ onHandleInputChange }
-										type="text"
-                    name="network"
-                    placeholder="sampleSSID"
-										id="network"/>
+                    <input
+                        className="pa2 input-reset ba bg-transparent hover-bg-black-70 hover-white w-100"
+                        onChange={ onHandleInputChange }
+                        type="text"
+                        name="network"
+                        placeholder="sampleSSID"
+                        id="network"
+                    />
                 </div>
                 <div className="mv3">
                   <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-									<input
-										className="b pa2 input-reset ba bg-transparent hover-bg-black-70 hover-white w-100"
-										onChange={ onHandleInputChange }
-										type="password"
-                    name="password"
-                    placeholder="samplePassword"
-										id="password"/>
+                    <input
+                        className="b pa2 input-reset ba bg-transparent hover-bg-black-70 hover-white w-100"
+                        onChange={ onHandleInputChange }
+                        type="password"
+                        name="password"
+                        placeholder="samplePassword"
+                        id="password"
+                    />
                 </div>
                 <div className="mt3">
                   <label className="db fw6 jh-copy f6" htmlFor="encryption">Encryption</label>
@@ -53,10 +55,11 @@ const WifiForm = ( { onHandleInputChange, onSubmit } ) => {
                 </div>
               </fieldset>
               <div className="">
-								<button
-									className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-									onClick={ onSubmit }
-								>Generate QR Code</button>
+                <button
+                    className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                    onClick={ onSubmit }>
+                    Generate QR Code
+                </button>
               </div>
             </div>
 
