@@ -1,8 +1,10 @@
 import React from 'react';
 import domtoimage from 'dom-to-image-more';
+import QRCode from 'qrcode';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import './App.css';
 import 'tachyons';
-import QRCode from 'qrcode';
 
 // import components
 import WifiForm from './components/WifiForm/WifiForm';
@@ -24,9 +26,6 @@ class App extends React.Component {
   componentDidMount() {
     this.generateQRCode();
   }
-
-      //   // TODO: want to use canvas.insertBefore( newNode, referenceNode )
-  // TODO: figure out how to get the checkbox input
 
   onHandleInputChange = ( event ) => {
     const target = event.target;
@@ -78,15 +77,26 @@ class App extends React.Component {
   }
 
   exportToPdf() {
+    let pdf = new jsPDF();
+    let qrCode = document.querySelector( '#canvas' );
 
+    let margin = 20;
+    html2canvas( qrCode )
+      .then( canvas => {
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage( canvas.toDataURL('image/png'), 'PNG', 0, margin );
+        console.log(canvas.width)
+        pdf.text( margin * 3, margin + ( canvas.width / 7 ), 'Scan this QR Code for the WIFI!' );
+        pdf.save( 'myWifiQRCode.pdf');
+		});
   }
 
   exportToImage() {
-    let qrCode = document.getElementById('canvas');
+    let qrCode = document.querySelector( '#canvas' );
 
-    domtoimage.toJpeg( qrCode, { quality: 0.95 })
+    domtoimage.toJpeg( qrCode, { quality: 0.95 } )
       .then( function ( dataUrl ) {
-        let link = document.createElement('a');
+        let link = document.createElement( 'a' );
         link.download = 'myWifiQRCode.jpeg';
         link.href = dataUrl;
         link.click();
