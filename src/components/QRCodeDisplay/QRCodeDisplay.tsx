@@ -1,7 +1,15 @@
 import React from 'react';
 import './QRCodeDisplay.css';
 
-const QRCodeDisplay = ( { title, exportToPdf, exportToImage } ) => {
+type ButtonFunction = () => void;
+
+interface QRCodeDisplayProps  {
+	title: string;
+	exportToPdf:  ButtonFunction;
+	exportToImage: ButtonFunction;
+}
+
+const QRCodeDisplay = ( { title, exportToPdf, exportToImage }: QRCodeDisplayProps ) => {
 	return (
 		<div className='panel'>
 			<h3>{ title }</h3>
