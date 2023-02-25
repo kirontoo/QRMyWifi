@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-import domtoimage from "dom-to-image-more";
 import QRCode from "qrcode";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import "./App.css";
 import type { ChangeEvent } from "react";
-import "jspdf/dist/polyfills.es.js";
 
 // import components
 import WifiForm from "./components/WifiForm/WifiForm";
@@ -88,35 +84,6 @@ const App = () => {
     }
   };
 
-  function exportToPdf() {
-    // let pdf = new jsPDF();
-    let qrCodeCanvas = document.querySelector("#canvas");
-
-    // let margin = 20;
-    // html2canvas(document.body).then((canvas) => {
-    //   let pdf = new jsPDF("p", "mm", "a4");
-    //   const imageData = canvas.toDataURL("image/png");
-    //   pdf.addImage(`data:${imageData}`);
-    //   pdf.text(
-    //     "Scan this QR Code for the WIFI!",
-    //     margin * 3,
-    //     margin + canvas.width / 7
-    //   );
-    //   pdf.save("myWifiQRCode.pdf");
-    // });
-  }
-
-  function exportToImage() {
-    let qrCode = document.querySelector("#canvas");
-
-    domtoimage.toJpeg(qrCode!, { quality: 0.95 }).then((dataUrl) => {
-      let link = document.createElement("a");
-      link.download = "myWifiQRCode.jpeg";
-      link.href = dataUrl;
-      link.click();
-    });
-  }
-
   return (
     <div className="App">
       <nav>
@@ -128,11 +95,7 @@ const App = () => {
           onHandleInputChange={onHandleInputChange}
           onSubmit={onSubmit}
         />
-        <QRCodeDisplay
-          title={state.title}
-          exportToPdf={exportToPdf}
-          exportToImage={exportToImage}
-        />
+        <QRCodeDisplay title={state.title} />
       </div>
     </div>
   );
