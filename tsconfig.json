@@ -3,7 +3,7 @@
     "target": "es6",
     "module": "commonjs",
     "jsx": "react-jsx",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
