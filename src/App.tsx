@@ -29,23 +29,6 @@ const App = () => {
     generateQRCode();
   }, []);
 
-  const onHandleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    setState((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
-
-  const onSubmit = () => {
-    generateQRCode();
-  };
-
   const generateQRCode = () => {
     let { network, password, encryption, hidden } = state;
 
@@ -93,7 +76,7 @@ const App = () => {
 
       <main className="lg:w-9/12 mx-auto">
         <HeroBanner />
-        <section className="my-6">
+        <section className="my-6 mb-20">
           <h2 id="how-it-works" className="text-secondary text-3xl sm:text-2xl md:text-3xl lg:text-4xl text-bold text-center mb-12">
             How It Works
           </h2>
@@ -117,13 +100,8 @@ const App = () => {
             })}
           </div>
         </section>
-        {/*
-        <WifiForm
-          onHandleInputChange={onHandleInputChange}
-          onSubmit={onSubmit}
-        />
+        <WifiForm />
         <QRCodeDisplay title={state.title} />
-        */}
       </main>
       <footer>
         <Footer />
