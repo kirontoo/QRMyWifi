@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, MouseEventHandler } from "react";
 import QRCode from "qrcode";
-import { WifiCredentials } from "../../lib/util";
+import { WifiCredentials, generateQRCode } from "../../lib/util";
 import "./WifiForm.css";
 
 const WifiForm = () => {
@@ -30,51 +30,12 @@ const WifiForm = () => {
     setState((s) => ({ ...s, hidden: !s.hidden }));
   };
 
-  const generateQRCode = () => {
-    let { network, password, encryption, hidden } = state;
-
-    // if entries are not filled, don't generate
-    if (!network && !password) {
-      return;
-    }
-
-    let canvas = document.getElementById("canvas");
-
-    // remove any existing canvases
-    let existingCanvas = document.getElementsByTagName("canvas");
-    if (existingCanvas.length > 0) {
-      canvas!.removeChild(existingCanvas[0]);
-    }
-
-    // generate QR code
-    let credentials = `WIFI:S:${network};T:${encryption};P:${password};`;
-    credentials += hidden ? "H:true" : "H:false";
-
-    QRCode.toCanvas(credentials, { scale: 10 }, function (err, qr) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-
-      canvas!.appendChild(qr);
-    });
-
-    if (network !== "sampleSSID") {
-      setState((prev) => {
-        return {
-          ...prev,
-          title: "Here's your QR Code!",
-        };
-      });
-    }
-  };
-
   return (
     <form
       className="flex flex-col gap-4"
       onSubmit={(event) => {
         event.preventDefault();
-        generateQRCode();
+        generateQRCode(state);
       }}
     >
       <div>
