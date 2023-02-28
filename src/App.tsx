@@ -6,6 +6,7 @@ import type { ChangeEvent } from "react";
 // import components
 import WifiForm from "./components/WifiForm/WifiForm";
 import QRCodeDisplay from "./components/QRCodeDisplay/QRCodeDisplay";
+import { Navbar, Footer, HeroBanner } from "./components";
 
 interface WifiCredentials {
   network: string;
@@ -85,19 +86,49 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <nav>
-        <h1 className="black underline">QR My WIFI</h1>
-      </nav>
+    <>
+      <header>
+        <Navbar />
+      </header>
 
-      <div className="container">
+      <main className="lg:w-9/12 mx-auto">
+        <HeroBanner />
+        <section className="my-6">
+          <h2 id="how-it-works" className="text-secondary text-3xl sm:text-2xl md:text-3xl lg:text-4xl text-bold text-center mb-12">
+            How It Works
+          </h2>
+          <div className="flex flex-col lg:flex-row justify-center items-center gap-4 px-4">
+            {new Array(4).fill(undefined).map(() => {
+              return (
+                <div className="card">
+                  <header className="card-header">
+                    <img src="https://via.placeholder.com/250" />
+                  </header>
+                  <main className="card-content">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
+                  </main>
+                  <footer className="card-footer">
+                    <a className="btn btn-pill btn-secondary" href="">
+                      some button
+                    </a>
+                  </footer>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+        {/*
         <WifiForm
           onHandleInputChange={onHandleInputChange}
           onSubmit={onSubmit}
         />
         <QRCodeDisplay title={state.title} />
-      </div>
-    </div>
+        */}
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </>
   );
 };
 
