@@ -1,13 +1,7 @@
 import { useState, ChangeEvent, MouseEventHandler } from "react";
 import QRCode from "qrcode";
+import { WifiCredentials } from "../../lib/util";
 import "./WifiForm.css";
-
-interface WifiCredentials {
-  network: string;
-  password: string;
-  encryption: string;
-  hidden: boolean;
-}
 
 const WifiForm = () => {
   const [state, setState] = useState<WifiCredentials>({
