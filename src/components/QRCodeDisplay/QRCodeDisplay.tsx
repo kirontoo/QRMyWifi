@@ -1,10 +1,7 @@
 import "./QRCodeDisplay.css";
 import domtoimage from "dom-to-image-more";
-import QRCode from "qrcode";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
-type ButtonFunction = () => void;
 
 interface QRCodeDisplayProps {
   title: string;
@@ -12,27 +9,33 @@ interface QRCodeDisplayProps {
 
 const QRCodeDisplay = ({ title }: QRCodeDisplayProps) => {
   function exportToPdf() {
-    // let pdf = new jsPDF();
-    let qrCodeCanvas = document.querySelector("#canvas");
+    let QRCode = document.getElementById("qrcode") as HTMLCanvasElement;
 
-    // let margin = 20;
-    // html2canvas(document.body).then((canvas) => {
-    //   let pdf = new jsPDF("p", "mm", "a4");
-    //   const imageData = canvas.toDataURL("image/png");
-    //   pdf.addImage(`data:${imageData}`);
-    //   pdf.text(
-    //     "Scan this QR Code for the WIFI!",
-    //     margin * 3,
-    //     margin + canvas.width / 7
-    //   );
-    //   pdf.save("myWifiQRCode.pdf");
-    // });
+    let doc = new jsPDF("p", "mm", "a4");
+
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    const widthRatio = pageWidth / QRCode.width / 2;
+    const heightRatio = pageHeight / QRCode.height / 2;
+    const ratio = widthRatio > heightRatio ? heightRatio : widthRatio;
+
+    const canvasWidth = QRCode.width * ratio;
+    const canvasHeight = QRCode.height * ratio;
+
+    const marginX = (pageWidth - canvasWidth) / 2;
+    const marginY = (pageHeight - canvasHeight) / 4;
+
+    doc.addImage(QRCode, marginX, marginY, canvasWidth, canvasHeight);
+    doc.text("Scan this QR Code for the WiFi!", pageWidth / 2, marginY, {
+      align: "center",
+    });
+    doc.save("myWifiQRCode.pdf");
   }
 
   function exportToImage() {
-    let qrCode = document.querySelector("#canvas");
-
-    domtoimage.toJpeg(qrCode!, { quality: 0.95 }).then((dataUrl) => {
+    let QRCanvas = document.querySelector("#canvas");
+    domtoimage.toJpeg(QRCanvas!, { quality: 0.95 }).then((dataUrl) => {
       let link = document.createElement("a");
       link.download = "myWifiQRCode.jpeg";
       link.href = dataUrl;
@@ -41,26 +44,18 @@ const QRCodeDisplay = ({ title }: QRCodeDisplayProps) => {
   }
 
   return (
-    <div className="panel">
-      <h3>{title}</h3>
-      <div id="canvas"></div>
-      <main>
-        <p className="b">Export to: </p>
-        <div className="buttonContainer">
-          <button
-            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-            onClick={exportToPdf}
-          >
-            PDF
-          </button>
-          <button
-            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-            onClick={exportToImage}
-          >
-            Image
-          </button>
-        </div>
-      </main>
+    <div className="mx-auto flex flex-col justify-center items-center gap-4">
+      <h3 className="text-3xl text-bold">{title}</h3>
+      <div id="canvas" className="border border-black"></div>
+      <span>Export to: </span>
+      <div className="flex gap-4 justify-center items-center w-full">
+        <button className="btn btn-secondary" onClick={exportToPdf}>
+          PDF
+        </button>
+        <button className="btn btn-secondary" onClick={exportToImage}>
+          Image
+        </button>
+      </div>
     </div>
   );
 };
