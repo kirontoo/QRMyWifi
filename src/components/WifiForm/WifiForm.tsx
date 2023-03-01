@@ -1,5 +1,4 @@
-import { useState, ChangeEvent, MouseEventHandler } from "react";
-import QRCode from "qrcode";
+import { useState, ChangeEvent } from "react";
 import { WifiCredentials, generateQRCode } from "../../lib/util";
 import "./WifiForm.css";
 
@@ -32,7 +31,7 @@ const WifiForm = () => {
 
   return (
     <form
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-4 w-full"
       onSubmit={(event) => {
         event.preventDefault();
         generateQRCode(state);
@@ -52,7 +51,7 @@ const WifiForm = () => {
           value={state.network}
           onChange={handleInputChange}
         />
-        <span className="input-helper">This is case-sensitive.</span>
+        <span className="input-helper">This is case-sensitive</span>
       </div>
       <div>
         <label htmlFor="password" className="input-label">
