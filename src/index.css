@@ -19,6 +19,10 @@ body {
   ease-in-out;
 }
 
+.btn-pill {
+  @apply rounded-full;
+}
+
 .btn-primary {
   @apply border
   border-primary
@@ -29,6 +33,47 @@ body {
 .btn-secondary {
   @apply border
   border-secondary
-  hover:bg-cyan-300
   bg-secondary text-white;
+}
+
+.card {
+  @apply flex flex-col gap-4;
+}
+
+.card > .card-header {
+  @apply mx-auto;
+}
+
+.input-label {
+  @apply block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300;
+}
+
+.input {
+  @apply bg-gray-50 
+  border 
+  border-gray-300 
+  text-gray-900 
+  text-sm 
+  rounded-lg 
+  focus:ring-primary 
+  focus:border-primary 
+  block 
+  w-full 
+  p-2.5 
+  dark:bg-gray-700 
+  dark:border-gray-600 
+  dark:placeholder-gray-400 
+  dark:text-white 
+  dark:focus:ring-primary 
+  dark:focus:border-primary;
+}
+
+.input-helper {
+  @apply pt-2;
+}
+
+.nav-link {
+  @apply md:p-4
+  hover:underline
+  text-center;
 }
