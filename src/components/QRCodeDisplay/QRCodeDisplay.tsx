@@ -34,7 +34,7 @@ const QRCodeDisplay = ({ title }: QRCodeDisplayProps) => {
   }
 
   function exportToImage() {
-    let QRCanvas = document.querySelector("#canvas");
+    let QRCanvas = document.querySelector("#qrcode");
     domtoimage.toJpeg(QRCanvas!, { quality: 0.95 }).then((dataUrl) => {
       let link = document.createElement("a");
       link.download = "myWifiQRCode.jpeg";
