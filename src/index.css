@@ -41,7 +41,7 @@ body {
 }
 
 .card-header {
-  @apply flex flex-col items-start justify-between min-h-[250px] gap-2;
+  @apply flex flex-col items-center lg:items-start justify-between min-h-[250px] gap-2;
 }
 
 .card-image {

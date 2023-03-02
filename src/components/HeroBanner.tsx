@@ -8,7 +8,7 @@ function HeroBanner() {
           Connect to WiFi in a snap with our QR code generator
         </h1>
         <a
-          className="btn btn-primary text-lg sm:text-xl() lg:text-2xl"
+          className="btn btn-primary text-lg sm:text-xl lg:text-2xl w-fit"
           href="#qr-generator"
         >
           Get Started
