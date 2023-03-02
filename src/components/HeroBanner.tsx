@@ -20,7 +20,7 @@ function HeroBanner() {
         </p>
       </div>
       <div>
-        <img src={QRCodePNG} className="lg:block hidden" aria-hidden="true"/>
+        <img src={QRCodePNG} className="lg:block hidden" aria-hidden="true" alt="sample qr code"/>
       </div>
     </section>
   );
