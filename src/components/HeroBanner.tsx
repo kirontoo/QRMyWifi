@@ -12,7 +12,8 @@ function HeroBanner() {
           Get Started
         </a>
         <p className="lg:w-10/12 text-black() font-normal text-md sm:text-lg text-center lg:text-left">
-          Simplify your life with our QR code generator. No more complicated
+          Tired of friends and family continuously asking for the Wifi password?
+          Then simplify your life with our QR code generator. No more complicated
           passwords, just scan and go!
         </p>
       </div>
