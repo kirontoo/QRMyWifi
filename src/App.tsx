@@ -12,23 +12,28 @@ import { Navbar, Footer, HeroBanner } from "./components";
 
 interface CardProps {
   head: string;
+  alt: string;
   content: string;
 }
 const HowItWorks: Array<CardProps> = [
   {
     head: EnterCredentials,
+    alt: "enter-credentials",
     content: "Enter your network name and password",
   },
   {
     head: SelectEncryptionTypePNG,
+    alt: "select encryption type",
     content: "Select the encryption type",
   },
   {
     head: GenerateQRCodePNG,
+    alt: "generate qr code",
     content: "Generate your code",
   },
   {
     head: ExportQRCodePNG,
+    alt: "export qr code",
     content: "Export and save!",
   },
 ];
@@ -64,7 +69,7 @@ const App = () => {
                       Step {i + 1}
                     </span>
                     <div className="card-image">
-                      <img className="w-full h-fit" src={c.head} />
+                      <img className="w-full h-fit" src={c.head} alt={c.alt}/>
                     </div>
                   </header>
                   <main>
