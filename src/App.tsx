@@ -4,7 +4,6 @@ import { generateQRCode, sampleWifiCred } from "./lib/util";
 import EnterCredentials from "./images/enter_credentials.png";
 import ExportQRCodePNG from "./images/export_qr_code.png";
 import GenerateQRCodePNG from "./images/generate_qr_code.png";
-import QRCodePNG from "./images/qr_code.png";
 import SelectEncryptionTypePNG from "./images/select_encryption_type.png";
 
 import WifiForm from "./components/WifiForm/WifiForm";
