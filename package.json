@@ -1,7 +1,8 @@
 {
-  "name": "qrmywifi",
+  "name": "QRMyWifi",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.21.0",
     "@babel/plugin-syntax-flow": "^7.18.6",
