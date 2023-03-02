@@ -1,7 +1,5 @@
 import QRCode from "qrcode";
 
-export const QRCanvas = document.getElementById("canvas");
-
 export interface WifiCredentials {
   network: string;
   password: string;
@@ -16,13 +14,6 @@ export const sampleWifiCred: WifiCredentials = {
   hidden: false,
 };
 
-export const clearQRCanvas = () => {
-  let existingCanvas = document.getElementsByTagName("canvas");
-  if (existingCanvas.length > 0) {
-    QRCanvas!.removeChild(existingCanvas[0]);
-  }
-};
-
 export const generateQRCode = ({
   network,
   password,
@@ -34,24 +25,25 @@ export const generateQRCode = ({
     return;
   }
 
-  let canvas = document.getElementById("canvas");
+  const QRCanvas = document.getElementById("canvas");
 
   // remove any existing canvases
   let existingCanvas = document.getElementsByTagName("canvas");
   if (existingCanvas.length > 0) {
-    canvas!.removeChild(existingCanvas[0]);
+    QRCanvas!.removeChild(existingCanvas[0]);
   }
 
   // generate QR code
   let credentials = `WIFI:S:${network};T:${encryption};P:${password};`;
   credentials += hidden ? "H:true" : "H:false";
 
-  QRCode.toCanvas(credentials, { scale: 10 }, function (err, qr) {
+  QRCode.toCanvas(credentials, { scale: 4, width: 300 }, function (err, qr) {
     if (err) {
       console.error(err);
       return;
     }
 
-    canvas!.appendChild(qr);
+    qr.id = "qrcode";
+    QRCanvas!.appendChild(qr);
   });
 };
