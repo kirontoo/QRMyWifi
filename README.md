@@ -61,7 +61,7 @@
 
 <br/>
 
-A simple web app to generate QR Codes to connet to a Wifi network. With a big 
+A quick and easy way to generate QR Codes and connet to a Wifi network. With a big 
 extended family I get tired of sharing the Wifi password all the time. Here's my
 solution. Now I just print this QR Code out and slap it on every wall in the 
 house :laughing:. 
